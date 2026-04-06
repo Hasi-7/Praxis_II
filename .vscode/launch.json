@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: sound_final_design_2",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/Sound/sound_final_design_2.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--motor-audio",
+        "${workspaceFolder}/Sound/Motor_1_O.mp3",
+        "--baseline-audio",
+        "${workspaceFolder}/Sound/Healthy_baseline.mp3"
+      ]
+    }
+  ]
+}

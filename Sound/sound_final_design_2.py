@@ -1,6 +1,8 @@
+import argparse
 import librosa
 import numpy as np
 import matplotlib.pyplot as plt
+from pathlib import Path
 from scipy.signal import welch, find_peaks
 
 # ═══════════════════════════════════════════════════════════════
@@ -449,13 +451,19 @@ def run_all_checks(freqs, psd_db, bl_freqs, bl_psd_db, shaft_freq):
 # ═══════════════════════════════════════════════════════════════
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--motor-audio", required=True, help="Path to the motor audio file")
+    parser.add_argument(
+        "--baseline-audio",
+        default=str(Path(__file__).with_name("Healthy_baseline.mp3")),
+        help="Path to the baseline audio file",
+    )
+    args = parser.parse_args()
 
     MOTORS = {
-        "Motor 1": r"C:\Users\Dell\Desktop\Code\University\ESC190\Praxis\Motor_1_O.mp3",
-        "Motor 3": r"C:\Users\Dell\Desktop\Code\University\ESC190\Praxis\Motor_3_O.mp3",
-        "Motor 4": r"C:\Users\Dell\Desktop\Code\University\ESC190\Praxis\Motor_4_O.mp3",
+        Path(args.motor_audio).stem.replace("_", " "): args.motor_audio,
     }
-    BASELINE_PATH = r"C:\Users\Dell\Desktop\Code\University\ESC190\Praxis\Motor_1_O.mp3"
+    BASELINE_PATH = args.baseline_audio
 
     # ── Build baseline (Motor 1 used as placeholder) ─────────────
     print("Loading baseline (Motor 1 placeholder)...")
